@@ -3,7 +3,7 @@ import Product from "../models/productModel.js";
 // Create a new product
 export const createProduct = async (req, res) => {
   try {
-    const { title, smeId, description, quantity, status } = req.body;
+    const { title, smeId, description, quantity, status } = req.body; 
 
     // Create a new product
     const newProduct = new Product({
