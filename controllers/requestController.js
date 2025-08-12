@@ -1,10 +1,13 @@
 import Request from "../models/requestModel.js";
+import { getManyFileUrl, uploadMany } from "../utils/uploadController.js";
 
 // Create a new request
 export const createRequest = async (req, res) => {
-  try {
-    const { title, image, userId, location, requestType } = req.body;
+  const { title, image, userId, location, requestType } = req.body;
+  const files = req.files;
 
+  try {
+    const uploadedImages = await uploadMany(files);
     // Create a new request
     const newRequest = new Request({
       title,
@@ -12,6 +15,7 @@ export const createRequest = async (req, res) => {
       userId,
       location,
       requestType,
+      images: uploadedImages,
     });
 
     // Save the new request
@@ -27,6 +31,10 @@ export const createRequest = async (req, res) => {
 export const getAllRequests = async (req, res) => {
   try {
     const requests = await Request.find();
+    for (const request of requests) {
+      const urls = await getManyFileUrl(product.images);
+      request.images = urls;
+    }
     res.status(200).json(requests);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -42,6 +50,8 @@ export const getRequestById = async (req, res) => {
     if (!request) {
       return res.status(404).json({ message: "Request not found" });
     }
+    const urls = await getManyFileUrl(request.images);
+    request.images = urls;
 
     res.status(200).json(request);
   } catch (error) {
@@ -51,9 +61,26 @@ export const getRequestById = async (req, res) => {
 
 // Update a request
 export const updateRequest = async (req, res) => {
+  const { id } = req.params;
+  const { title, image, location, status, assignedDriver, requestType } =
+    req.body;
+  const files = req.files;
+
   try {
-    const { id } = req.params;
-    const { title, image, location, status, assignedDriver, requestType } = req.body;
+    if (files) {
+      const uploadedImages = await uploadMany(files);
+      // Find the product by id and update
+      const updatedRequest = await Request.findByIdAndUpdate(
+        id,
+        { title, description, quantity, status, images: uploadedImages },
+        { new: true }
+      );
+
+      return res.status(200).json({
+        message: "Request updated successfully",
+        request: updatedRequest,
+      });
+    }
 
     // Find the request by id and update
     const updatedRequest = await Request.findByIdAndUpdate(
@@ -66,7 +93,10 @@ export const updateRequest = async (req, res) => {
       return res.status(404).json({ message: "Request not found" });
     }
 
-    res.status(200).json({ message: "Request updated successfully", request: updatedRequest });
+    res.status(200).json({
+      message: "Request updated successfully",
+      request: updatedRequest,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

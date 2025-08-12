@@ -25,6 +25,7 @@ const vehicleSchema = new mongoose.Schema(
       enum: ["In Service", "Out of Service"],
       default: "In Service",
     },
+    image: [String],
   },
   { timestamps: true }
 );
