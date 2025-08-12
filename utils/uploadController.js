@@ -1,4 +1,4 @@
-import { getFileUrl, uploadFile } from "./upload";
+import { getFileUrl, uploadFile } from "./upload.js";
 
 export const uploadMany = async (files) => {
   const uploadedFileNames = [];

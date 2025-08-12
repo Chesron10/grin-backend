@@ -341,16 +341,13 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `POST`
 *   **Description:** Creates a new product.
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "title": "Organic Rice",
-      "smeId": "654b67890123456789012345",
-      "description": "Locally sourced organic rice.",
-      "quantity": 100,
-      "status": "Available"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `files`: An array of up to 5 image files.
+    *   `title`: String
+    *   `smeId`: String
+    *   `description`: String
+    *   `quantity`: Number
+    *   `status`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
@@ -406,15 +403,12 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `PUT`
 *   **Description:** Updates an existing product's details.
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "title": "Fresh Vegetables",
-      "description": "Assorted fresh vegetables.",
-      "quantity": 50,
-      "status": "Not Available"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `files`: An array of up to 5 image files.
+    *   `title`: String
+    *   `description`: String
+    *   `quantity`: Number
+    *   `status`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
@@ -455,16 +449,12 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `POST`
 *   **Description:** Creates a new request (e.g., pickup, report).
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "title": "Waste Pickup Request",
-      "image": "http://example.com/image.jpg",
-      "userId": "654b67890123456789012345",
-      "location": "Freetown",
-      "requestType": "Pickup"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `files`: An array of up to 5 image files.
+    *   `title`: String
+    *   `userId`: String
+    *   `location`: String
+    *   `requestType`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
@@ -522,16 +512,13 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `PUT`
 *   **Description:** Updates an existing request's details.
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "title": "Updated Pickup Request",
-      "location": "Bo",
-      "status": "assigned",
-      "assignedDriver": "654b67890123456789012346",
-      "requestType": "Pickup"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `files`: An array of up to 5 image files.
+    *   `title`: String
+    *   `location`: String
+    *   `status`: String
+    *   `assignedDriver`: String
+    *   `requestType`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
@@ -694,16 +681,13 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `POST`
 *   **Description:** Creates a new vehicle.
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "name": "Truck 001",
-      "type": "Truck",
-      "driver": "654b67890123456789012345",
-      "cityCouncilId": "654b67890123456789012346",
-      "status": "In Service"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `file`: A single image file.
+    *   `name`: String
+    *   `type`: String
+    *   `driver`: String
+    *   `cityCouncilId`: String
+    *   `status`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
@@ -759,16 +743,13 @@ This API uses JSON Web Tokens (JWT) for authentication. After successful login, 
 *   **Method:** `PUT`
 *   **Description:** Updates an existing vehicle's details.
 *   **Authentication:** Required.
-*   **Request Body (JSON):**
-    ```json
-    {
-      "name": "Tricycle 002",
-      "type": "Tricycle",
-      "driver": "654b67890123456789012347",
-      "cityCouncilId": "654b67890123456789012346",
-      "status": "Out of Service"
-    }
-    ```
+*   **Request Body (Multipart/Form-Data):**
+    *   `file`: A single image file.
+    *   `name`: String
+    *   `type`: String
+    *   `driver`: String
+    *   `cityCouncilId`: String
+    *   `status`: String
 *   **Response Body (JSON - Success):**
     ```json
     {
